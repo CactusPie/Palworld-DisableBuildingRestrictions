@@ -108,6 +108,11 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions
             }
 
             Dispatcher.Invoke(() =>
+            {
+                LabelWaitingForProcess.Content = $"Waiting for the game to be running...";
+            });
+
+            Dispatcher.Invoke(() =>
                 {
                     StackPanelModules.Visibility = Visibility.Collapsed;
                     LabelWaitingForProcess.Visibility = Visibility.Visible;

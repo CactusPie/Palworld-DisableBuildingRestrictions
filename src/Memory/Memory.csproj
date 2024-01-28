@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Memory.dll.$(Platform)</PackageId>
+    <PackageProjectUrl>https://erfg12.github.io/memory.dll</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/erfg12/memory.dll</RepositoryUrl>
+    <Company>New Age Software LLC</Company>
+    <Authors>NeWaGe, hollow87</Authors>
+    <Product>Memory.dll</Product>
+    <Description>Read and Write to process memory. Make PC cheat trainers easily!</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <Version>1.2.26</Version>
+    <Platforms>x64;x86</Platforms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="README.txt" pack="true" PackagePath="." />
+	  <None Include="icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+    <None Include="build\**" Pack="True" PackagePath="build\" />
+	</ItemGroup>
+
+</Project>

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CactusPie.Palworld.DisableBuildingRestrictions", "CactusPie.Palworld.DisableBuildingRestrictions\CactusPie.Palworld.DisableBuildingRestrictions.csproj", "{4896B6D4-BA9E-456A-A10E-3AB2ECB18DBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memory", "Memory\Memory.csproj", "{2802BFFE-3B4D-496F-9A10-3F3062807D67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4896B6D4-BA9E-456A-A10E-3AB2ECB18DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4896B6D4-BA9E-456A-A10E-3AB2ECB18DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4896B6D4-BA9E-456A-A10E-3AB2ECB18DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2802BFFE-3B4D-496F-9A10-3F3062807D67}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{2802BFFE-3B4D-496F-9A10-3F3062807D67}.Debug|Any CPU.Build.0 = Debug|x64
+		{2802BFFE-3B4D-496F-9A10-3F3062807D67}.Release|Any CPU.ActiveCfg = Release|x64
+		{2802BFFE-3B4D-496F-9A10-3F3062807D67}.Release|Any CPU.Build.0 = Release|x64
 	EndGlobalSection
 EndGlobal

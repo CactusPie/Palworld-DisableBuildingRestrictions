@@ -6,11 +6,22 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <ApplicationIcon>icon.ico</ApplicationIcon>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <NoWarn>1701;1702;1591</NoWarn>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Memory.dll.x64" Version="1.2.24" />
       <PackageReference Include="NHotkey.Wpf" Version="3.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Memory\Memory.csproj" />
     </ItemGroup>
 
 </Project>

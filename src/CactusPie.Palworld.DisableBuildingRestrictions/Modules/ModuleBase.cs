@@ -95,7 +95,7 @@ public abstract class ModuleBase : IModule
 
         _isRunningHotkey = true;
 
-        if (GameMemory.mProc.Process.HasExited)
+        if (GameMemory.MProc.Process.HasExited)
         {
             IsEnabled = false;
             HotkeyManager.Current.Remove(Name);

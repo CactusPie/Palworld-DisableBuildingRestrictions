@@ -30,6 +30,8 @@ public abstract class ModuleBase : IModule
 
     public event EventHandler? StateChanged;
 
+    private bool _isRunningHotkey = false;
+
     public ModuleBase(Window mainWindow, string defaultAobs, string alreadyEnabledAobs)
     {
         _mainWindow = mainWindow;
@@ -86,10 +88,12 @@ public abstract class ModuleBase : IModule
 
     private void OnHotkeyPressed(object? sender, HotkeyEventArgs e)
     {
-        if (GameMemory == null)
+        if (_isRunningHotkey || GameMemory == null)
         {
             return;
         }
+
+        _isRunningHotkey = true;
 
         if (GameMemory.mProc.Process.HasExited)
         {
@@ -99,6 +103,7 @@ public abstract class ModuleBase : IModule
         }
 
         Toggle();
+        _isRunningHotkey = false;
     }
 
     private async Task<long?> GetDefaultAddress()

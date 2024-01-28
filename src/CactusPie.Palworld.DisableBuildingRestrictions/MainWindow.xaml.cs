@@ -54,7 +54,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions
             {
                 bool opened = GameMemory.OpenProcess("Palworld-Win64-Shipping.exe");
 
-                if (!opened)
+                if (!opened || GameMemory.mProc.Process.HasExited)
                 {
                     await Task.Delay(1000).ConfigureAwait(false);
                     continue;

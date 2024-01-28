@@ -5,7 +5,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public class WaterBuildingModule : ModuleBase
 {
-    public override Key Hotkey => Key.F10;
+    public override Key Hotkey => Key.F9;
 
     public override string Name => "Water Building";
 

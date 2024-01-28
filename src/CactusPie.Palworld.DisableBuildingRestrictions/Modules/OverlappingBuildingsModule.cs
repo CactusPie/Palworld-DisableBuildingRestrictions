@@ -5,7 +5,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public class OverlappingBuildingsModule : ModuleBase
 {
-    public override Key Hotkey => Key.F9;
+    public override Key Hotkey => Key.F8;
 
     public override string Name => "Overlapping Buildings";
 

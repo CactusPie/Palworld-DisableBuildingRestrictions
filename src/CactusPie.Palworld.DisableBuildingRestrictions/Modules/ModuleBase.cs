@@ -40,7 +40,7 @@ public abstract class ModuleBase : IModule
     public async Task<bool> TryInitialize(Mem gameMemory)
     {
         GameMemory = gameMemory;
-        bool usingAlreadyEnabledAobs = true;
+        bool usingAlreadyEnabledAobs = false;
 
         long? address = await GetDefaultAddress().ConfigureAwait(false);
 

@@ -5,7 +5,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public class BuildingInMidAirModule : ModuleBase
 {
-    public override Key Hotkey => Key.F11;
+    public override Key Hotkey => Key.F10;
 
     public override string Name => "Mid Air Building";
 

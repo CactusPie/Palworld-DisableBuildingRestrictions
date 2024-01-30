@@ -13,4 +13,8 @@ public static class PalworldAobs
     public const string DefaultBuildingInMidAirAobs = "0F 84 8C 00 00 00 48 8D 8D";
 
     public const string EnabledBuildingInMidAirAobs = "90 90 90 90 90 90 48 8D 8D E0 00 00 00";
+
+    public const string DefaultBuildingCloseToPalboxAobs = "74 15 48 8B 9E A8 02 00 00 B2 02";
+
+    public const string EnabledBuildingCloseToPalboxAobs = "EB 15 48 8B 9E A8 02 00 00 B2 02";
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Memory;
 
-namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
+namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 public interface IModule
 {

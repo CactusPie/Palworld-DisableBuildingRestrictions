@@ -8,7 +8,7 @@ using Memory;
 using NHotkey;
 using NHotkey.Wpf;
 
-namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
+namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 public abstract class ModuleBase : IModule
 {

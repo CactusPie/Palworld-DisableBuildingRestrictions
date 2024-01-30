@@ -166,6 +166,111 @@ unregistersymbol(INJECT)
         </Hotkey>
       </Hotkeys>
     </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Allow building close to palbox"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
+  Version: 
+  Date   : 2024-01-30
+  Author : Matt
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 15 48 8B 9E A8 02 00 00 B2 02) // should be unique
+
+INJECT:
+  db EB 15 48 8B 9E A8 02 00 00
+
+
+[DISABLE]
+
+INJECT:
+  db 74 15 48 8B 9E A8 02 00 00
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: 7FF6E4E98385
+
+7FF6E4E98356: 48 8D 44 24 50           - lea rax,[rsp+50]
+7FF6E4E9835B: 0F 29 44 24 70           - movaps [rsp+70],xmm0
+7FF6E4E98360: 0F 10 44 24 30           - movups xmm0,[rsp+30]
+7FF6E4E98365: 48 89 44 24 20           - mov [rsp+20],rax
+7FF6E4E9836A: F2 0F 11 4D 80           - movsd [rbp-80],xmm1
+7FF6E4E9836F: F2 0F 10 4C 24 40        - movsd xmm1,[rsp+40]
+7FF6E4E98375: 0F 29 45 90              - movaps [rbp-70],xmm0
+7FF6E4E98379: F2 0F 11 4D A0           - movsd [rbp-60],xmm1
+7FF6E4E9837E: E8 4D 69 1C 00           - call 7FF6E505ECD0
+7FF6E4E98383: 84 C0                    - test al,al
+// ---------- INJECTING HERE ----------
+7FF6E4E98385: 74 15                    - je 7FF6E4E9839C
+// ---------- DONE INJECTING  ----------
+7FF6E4E98387: 48 8B 9E A8 02 00 00     - mov rbx,[rsi+000002A8]
+7FF6E4E9838E: B2 02                    - mov dl,02
+7FF6E4E98390: 0F B6 4B 30              - movzx ecx,byte ptr [rbx+30]
+7FF6E4E98394: E8 47 0C 0F 00           - call 7FF6E4F88FE0
+7FF6E4E98399: 88 43 30                 - mov [rbx+30],al
+7FF6E4E9839C: 4C 8D 9C 24 30 02 00 00  - lea r11,[rsp+00000230]
+7FF6E4E983A4: 49 8B 5B 20              - mov rbx,[r11+20]
+7FF6E4E983A8: 49 8B 73 28              - mov rsi,[r11+28]
+7FF6E4E983AC: 49 8B 7B 30              - mov rdi,[r11+30]
+7FF6E4E983B0: 49 8B E3                 - mov rsp,r11
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Build without support"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
+  Version: 
+  Date   : 2024-01-30
+  Author : Matt
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,7E 68 48 8B 4C 24 28) // should be unique
+
+INJECT:
+  db 90 90
+
+[DISABLE]
+INJECT:
+  db 7E 68 48 8B 4C 24 28
+
+{
+// ORIGINAL CODE - INJECTION POINT: 7FF6E4E7CC2B
+
+7FF6E4E7CBFB: E9 73 FF FF FF        - jmp 7FF6E4E7CB73
+7FF6E4E7CC00: 44 89 54 24 54        - mov [rsp+54],r10d
+7FF6E4E7CC05: E9 17 FF FF FF        - jmp 7FF6E4E7CB21
+7FF6E4E7CC0A: 4C 8D 44 24 28        - lea r8,[rsp+28]
+7FF6E4E7CC0F: 44 0F 29 4C 24 40     - movaps [rsp+40],xmm9
+7FF6E4E7CC15: 48 8D 54 24 40        - lea rdx,[rsp+40]
+7FF6E4E7CC1A: F2 44 0F 11 44 24 50  - movsd [rsp+50],xmm8
+7FF6E4E7CC21: 49 8B CF              - mov rcx,r15
+7FF6E4E7CC24: E8 B7 B4 11 00        - call 7FF6E4F980E0
+7FF6E4E7CC29: 85 C0                 - test eax,eax
+// ---------- INJECTING HERE ----------
+7FF6E4E7CC2B: 7E 68                 - jle 7FF6E4E7CC95
+// ---------- DONE INJECTING  ----------
+7FF6E4E7CC2D: 48 8B 4C 24 28        - mov rcx,[rsp+28]
+7FF6E4E7CC32: 48 85 C9              - test rcx,rcx
+7FF6E4E7CC35: 74 05                 - je 7FF6E4E7CC3C
+7FF6E4E7CC37: E8 E4 02 2B 00        - call 7FF6E512CF20
+7FF6E4E7CC3C: 48 8B 4D 40           - mov rcx,[rbp+40]
+7FF6E4E7CC40: 33 DB                 - xor ebx,ebx
+7FF6E4E7CC42: 89 5D 48              - mov [rbp+48],ebx
+7FF6E4E7CC45: 48 85 C9              - test rcx,rcx
+7FF6E4E7CC48: 74 05                 - je 7FF6E4E7CC4F
+7FF6E4E7CC4A: E8 D1 02 2B 00        - call 7FF6E512CF20
+}
+</AssemblerScript>
+    </CheatEntry>
   </CheatEntries>
   <CheatCodes>
     <CodeEntry>

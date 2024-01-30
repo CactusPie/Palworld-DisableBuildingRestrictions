@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CactusPie.Palworld.DisableBuildingRestrictions.Modules;
+using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 using Memory;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions;

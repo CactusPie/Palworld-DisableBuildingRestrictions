@@ -26,6 +26,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions
                 new(new OverlappingBuildingsModule(this)),
                 new(new WaterBuildingModule(this)),
                 new(new BuildingInMidAirModule(this)),
+                new(new BuildingCloseToPalboxModule(this)),
             };
 
             InitializeComponent();

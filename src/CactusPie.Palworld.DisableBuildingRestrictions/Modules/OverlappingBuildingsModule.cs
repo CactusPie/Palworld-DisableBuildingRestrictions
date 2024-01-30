@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 

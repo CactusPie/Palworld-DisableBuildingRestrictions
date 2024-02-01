@@ -15,7 +15,7 @@ namespace Memory
     /// Memory.dll class. Full documentation at https://github.com/erfg12/memory.dll/wiki
     /// Trimmed down to the absolute minimum in order to avoid detection by Antivirus software
     /// </summary>
-    public partial class Mem
+    public sealed partial class Mem
     {
         public Proc MProc = new Proc();
 

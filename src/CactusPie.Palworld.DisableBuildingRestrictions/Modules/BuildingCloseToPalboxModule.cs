@@ -4,13 +4,17 @@ using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
-public class BuildingCloseToPalboxModule : ModuleBase
+public sealed class BuildingCloseToPalboxModule : ModuleBase
 {
+    private const string DefaultBuildingCloseToPalboxAobs = "74 15 48 8B 9E A8 02 00 00 B2 02";
+
+    private const string EnabledBuildingCloseToPalboxAobs = "EB 15 48 8B 9E A8 02 00 00 B2 02";
+
     public override Key Hotkey => Key.F11;
 
     public override string Name => "Building Close To Palbox";
 
-    public BuildingCloseToPalboxModule(Window mainWindow) : base(mainWindow, PalworldAobs.DefaultBuildingCloseToPalboxAobs, PalworldAobs.EnabledBuildingCloseToPalboxAobs)
+    public BuildingCloseToPalboxModule(Window mainWindow) : base(mainWindow, DefaultBuildingCloseToPalboxAobs, EnabledBuildingCloseToPalboxAobs)
     {
     }
 

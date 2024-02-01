@@ -9,7 +9,7 @@ using static Memory.Imps;
 
 namespace Memory
 {
-    public partial class Mem
+    public sealed partial class Mem
     {
         ConcurrentDictionary<string, CancellationTokenSource> FreezeTokenSrcs = new ConcurrentDictionary<string, CancellationTokenSource>();
 

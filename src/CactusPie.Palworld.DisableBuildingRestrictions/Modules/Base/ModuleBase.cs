@@ -18,6 +18,10 @@ public abstract class ModuleBase : IModule
 
     private readonly string _alreadyEnabledAobs;
 
+    private long _minAddress;
+
+    private long _maxAddress;
+
     protected Mem? GameMemory { get; private set; }
 
     protected string? Address { get; private set; }
@@ -42,6 +46,10 @@ public abstract class ModuleBase : IModule
     public async Task<bool> TryInitialize(Mem gameMemory)
     {
         GameMemory = gameMemory;
+
+        _minAddress = GameMemory.MProc.MainModule.BaseAddress.ToInt64();
+        _maxAddress = _minAddress + GameMemory.MProc.MainModule.ModuleMemorySize;
+
         bool usingAlreadyEnabledAobs = false;
 
         long? address = await GetDefaultAddress().ConfigureAwait(false);
@@ -109,7 +117,7 @@ public abstract class ModuleBase : IModule
     private async Task<long?> GetDefaultAddress()
     {
         IEnumerable<long>? addresses = await GameMemory
-            .AoBScan(_defaultAobs, false, true)
+            .AoBScan(_minAddress, _maxAddress, _defaultAobs, false, true)
             .ConfigureAwait(false);
 
         long? address = addresses?.FirstOrDefault();
@@ -119,7 +127,7 @@ public abstract class ModuleBase : IModule
     private async Task<long?> GetAddressForAlreadyModifiedCode()
     {
         IEnumerable<long>? addresses = await GameMemory
-            .AoBScan(_alreadyEnabledAobs, false, true)
+            .AoBScan(_minAddress, _maxAddress, _alreadyEnabledAobs, false, true)
             .ConfigureAwait(false);
 
         long? address = addresses?.FirstOrDefault();

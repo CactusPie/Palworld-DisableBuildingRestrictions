@@ -14,17 +14,7 @@ public abstract class ModuleBase : IModule
 {
     private readonly Window _mainWindow;
 
-    private readonly string _defaultAobs;
-
-    private readonly string _alreadyEnabledAobs;
-
-    private long _minAddress;
-
-    private long _maxAddress;
-
-    protected Mem? GameMemory { get; private set; }
-
-    protected string? Address { get; private set; }
+    protected Mem? GameMemory { get; set; }
 
     public abstract Key Hotkey { get; }
 
@@ -36,46 +26,12 @@ public abstract class ModuleBase : IModule
 
     private bool _isRunningHotkey = false;
 
-    public ModuleBase(Window mainWindow, string defaultAobs, string alreadyEnabledAobs)
+    public ModuleBase(Window mainWindow)
     {
         _mainWindow = mainWindow;
-        _defaultAobs = defaultAobs;
-        _alreadyEnabledAobs = alreadyEnabledAobs;
     }
 
-    public async Task<bool> TryInitialize(Mem gameMemory)
-    {
-        GameMemory = gameMemory;
-
-        _minAddress = GameMemory.MProc.MainModule.BaseAddress.ToInt64();
-        _maxAddress = _minAddress + GameMemory.MProc.MainModule.ModuleMemorySize;
-
-        bool usingAlreadyEnabledAobs = false;
-
-        long? address = await GetDefaultAddress().ConfigureAwait(false);
-
-        if (address is null or 0)
-        {
-            usingAlreadyEnabledAobs = true;
-            address = await GetAddressForAlreadyModifiedCode().ConfigureAwait(false);
-        }
-
-        if (address is null or 0)
-        {
-            return false;
-        }
-
-        Address = address.Value.ToString("X");
-
-        _mainWindow.Dispatcher.Invoke(() =>
-            {
-                HotkeyManager.Current.AddOrReplace(Name, Hotkey, ModifierKeys.None, OnHotkeyPressed);
-            });
-
-        IsEnabled = usingAlreadyEnabledAobs;
-
-        return true;
-    }
+    public abstract Task<bool> TryInitialize(Mem gameMemory);
 
     public void OnGameProcessExited()
     {
@@ -92,6 +48,14 @@ public abstract class ModuleBase : IModule
     {
         EventHandler? eventHandler = StateChanged;
         eventHandler?.Invoke(this, EventArgs.Empty);
+    }
+
+    protected void EnableHotkey()
+    {
+        _mainWindow.Dispatcher.Invoke(() =>
+        {
+            HotkeyManager.Current.AddOrReplace(Name, Hotkey, ModifierKeys.None, OnHotkeyPressed);
+        });
     }
 
     private void OnHotkeyPressed(object? sender, HotkeyEventArgs e)
@@ -112,25 +76,5 @@ public abstract class ModuleBase : IModule
 
         Toggle();
         _isRunningHotkey = false;
-    }
-
-    private async Task<long?> GetDefaultAddress()
-    {
-        IEnumerable<long>? addresses = await GameMemory
-            .AoBScan(_minAddress, _maxAddress, _defaultAobs, false, true)
-            .ConfigureAwait(false);
-
-        long? address = addresses?.FirstOrDefault();
-        return address;
-    }
-
-    private async Task<long?> GetAddressForAlreadyModifiedCode()
-    {
-        IEnumerable<long>? addresses = await GameMemory
-            .AoBScan(_minAddress, _maxAddress, _alreadyEnabledAobs, false, true)
-            .ConfigureAwait(false);
-
-        long? address = addresses?.FirstOrDefault();
-        return address;
     }
 }

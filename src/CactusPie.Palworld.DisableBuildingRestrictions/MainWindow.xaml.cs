@@ -23,6 +23,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions
         {
             _moduleControls = new ModuleControl[]
             {
+                new(new NoSnappingModule(this)),
                 new(new OverlappingBasesModule(this)),
                 new(new OverlappingBuildingsModule(this)),
                 new(new WaterBuildingModule(this)),

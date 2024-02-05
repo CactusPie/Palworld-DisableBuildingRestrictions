@@ -223,6 +223,92 @@ INJECT:
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
+      <ID>10</ID>
+      <Description>"Disable Snapping"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
+  Version: 
+  Date   : 2024-02-05
+  Author : CactusPie
+}
+
+[ENABLE]
+
+aobscanmodule(CHECK1,Palworld-Win64-Shipping.exe,75 79 0F 5A D1) // should be unique
+aobscanmodule(CHECK2,Palworld-Win64-Shipping.exe,0F 87 48 04 00 00 41) // should be unique
+
+CHECK1:
+  db EB
+
+CHECK2:
+  db E9 49 04 00 00 90
+
+[DISABLE]
+
+CHECK1:
+  db 75
+
+CHECK2:
+  db 0F 87 48 04 00 00
+
+{
+// ORIGINAL CODE - CHECK1 INJECTION POINT: 7FF7C5843AA8
+
+7FF7C5843A78: F2 41 0F 5C F4           - subsd xmm6,xmm12
+7FF7C5843A7D: F2 0F 11 44 24 40        - movsd [rsp+40],xmm0
+7FF7C5843A83: 41 0F 54 D5              - andps xmm2,xmm13
+7FF7C5843A87: 66 0F 5A CA              - cvtpd2ps xmm1,xmm2
+7FF7C5843A8B: F2 0F 58 F7              - addsd xmm6,xmm7
+7FF7C5843A8F: F3 0F 10 38              - movss xmm7,[rax]
+7FF7C5843A93: 48 8B 84 24 D0 01 00 00  - mov rax,[rsp+000001D0]
+7FF7C5843A9B: 44 0F 28 CF              - movaps xmm9,xmm7
+7FF7C5843A9F: F3 0F 11 4C 24 24        - movss [rsp+24],xmm1
+7FF7C5843AA5: 38 48 01                 - cmp [rax+01],cl
+// ---------- INJECTING HERE ----------
+7FF7C5843AA8: 75 79                    - jne 7FF7C5843B23
+// ---------- DONE INJECTING  ----------
+7FF7C5843AAA: 0F 5A D1                 - cvtps2pd xmm2,xmm1
+7FF7C5843AAD: 41 0F 28 CF              - movaps xmm1,xmm15
+7FF7C5843AB1: 0F 28 C2                 - movaps xmm0,xmm2
+7FF7C5843AB4: 41 0F 54 CD              - andps xmm1,xmm13
+7FF7C5843AB8: F2 0F 5C C1              - subsd xmm0,xmm1
+7FF7C5843ABC: 66 0F 5A C8              - cvtpd2ps xmm1,xmm0
+7FF7C5843AC0: 0F 2F CF                 - comiss xmm1,xmm7
+7FF7C5843AC3: 77 5E                    - ja 7FF7C5843B23
+7FF7C5843AC5: 66 44 0F 2F FB           - comisd xmm15,xmm3
+7FF7C5843ACA: B1 01                    - mov cl,01
+}
+
+{
+// ORIGINAL CODE - CHECK2 INJECTION POINT: 7FF7C5843B5A
+
+7FF7C5843B2A: F2 44 0F 10 6C 24 38  - movsd xmm13,[rsp+38]
+7FF7C5843B31: F2 44 0F 10 74 24 30  - movsd xmm14,[rsp+30]
+7FF7C5843B38: F3 0F 10 54 24 20     - movss xmm2,[rsp+20]
+7FF7C5843B3E: 41 0F 28 CB           - movaps xmm1,xmm11
+7FF7C5843B42: 0F 54 0D 77 DB 4E 03  - andps xmm1,[7FF7C8D316C0]
+7FF7C5843B49: 0F 5A D2              - cvtps2pd xmm2,xmm2
+7FF7C5843B4C: 0F 28 C2              - movaps xmm0,xmm2
+7FF7C5843B4F: F2 0F 5C C1           - subsd xmm0,xmm1
+7FF7C5843B53: 66 0F 5A C8           - cvtpd2ps xmm1,xmm0
+7FF7C5843B57: 0F 2F CF              - comiss xmm1,xmm7
+// ---------- INJECTING HERE ----------
+7FF7C5843B5A: 0F 87 48 04 00 00     - ja 7FF7C5843FA8
+// ---------- DONE INJECTING  ----------
+7FF7C5843B60: 41 0F 2F C9           - comiss xmm1,xmm9
+7FF7C5843B64: 0F 83 3E 04 00 00     - jae 7FF7C5843FA8
+7FF7C5843B6A: 66 44 0F 2F DB        - comisd xmm11,xmm3
+7FF7C5843B6F: 77 0B                 - ja 7FF7C5843B7C
+7FF7C5843B71: 73 06                 - jae 7FF7C5843B79
+7FF7C5843B73: 41 0F 28 E0           - movaps xmm4,xmm8
+7FF7C5843B77: EB 03                 - jmp 7FF7C5843B7C
+7FF7C5843B79: 0F 57 E4              - xorps xmm4,xmm4
+7FF7C5843B7C: 44 0F 5A E4           - cvtps2pd xmm12,xmm4
+7FF7C5843B80: 0F 28 EA              - movaps xmm5,xmm2
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
       <ID>6</ID>
       <Description>"Build without support"</Description>
       <VariableType>Auto Assembler Script</VariableType>

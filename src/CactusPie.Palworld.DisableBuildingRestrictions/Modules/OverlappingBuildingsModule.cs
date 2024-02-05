@@ -4,7 +4,7 @@ using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
-public sealed class OverlappingBuildingsModule : ModuleBase
+public sealed class OverlappingBuildingsModule : SingleAddressModuleBase
 {
     private const string DefaultOverlappingBuildingsAobs = "74 07 B0 14 E9 2F 01 00 00";
 

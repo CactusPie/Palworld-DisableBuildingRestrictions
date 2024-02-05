@@ -4,7 +4,7 @@ using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
-public sealed class WaterBuildingModule : ModuleBase
+public sealed class WaterBuildingModule : SingleAddressModuleBase
 {
     private const string DefaultWaterBuildingAobs = "75 0E 0F B6 4E 30";
 

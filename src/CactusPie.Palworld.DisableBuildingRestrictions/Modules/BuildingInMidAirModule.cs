@@ -4,7 +4,7 @@ using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
-public sealed class BuildingInMidAirModule : ModuleBase
+public sealed class BuildingInMidAirModule : SingleAddressModuleBase
 {
     private const string DefaultBuildingInMidAirAobs = "0F 84 8A 00 00 00 48 8D 8D";
 

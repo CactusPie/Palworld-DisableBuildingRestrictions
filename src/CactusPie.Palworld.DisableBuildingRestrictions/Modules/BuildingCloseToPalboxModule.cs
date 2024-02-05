@@ -4,7 +4,7 @@ using CactusPie.Palworld.DisableBuildingRestrictions.Modules.Base;
 
 namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
-public sealed class BuildingCloseToPalboxModule : ModuleBase
+public sealed class BuildingCloseToPalboxModule : SingleAddressModuleBase
 {
     private const string DefaultBuildingCloseToPalboxAobs = "74 15 48 8B 9E A8 02 00 00 B2 02";
 

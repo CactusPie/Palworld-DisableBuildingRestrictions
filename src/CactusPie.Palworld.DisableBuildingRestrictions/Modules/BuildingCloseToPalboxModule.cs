@@ -24,11 +24,11 @@ public sealed class BuildingCloseToPalboxModule : SingleAddressModuleBase
 
         if (IsEnabled)
         {
-            GameMemory.WriteBytes(Address, new byte[]{ 0xEB, 0x15 });
+            GameMemory.WriteBytes(Address, new byte[]{ 0xEB });
         }
         else
         {
-            GameMemory.WriteBytes(Address, new byte[]{ 0x74, 0x15 });
+            GameMemory.WriteBytes(Address, new byte[]{ 0x74 });
         }
 
         OnStateChanged();

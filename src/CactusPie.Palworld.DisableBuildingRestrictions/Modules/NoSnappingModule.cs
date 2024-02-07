@@ -7,12 +7,12 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 public sealed class NoSnappingModule : MultiAddressModuleBase
 {
     private static readonly string[] DefaultNoSnappingAobs = {
-        "75 79 0F 5A D1",
+        "75 79 41 0F 28 CF",
         "0F 87 48 04 00 00 41",
     };
 
     private static readonly string[] EnabledNoSnappingAobs = {
-        "EB 79 0F 5A D1",
+        "EB 79 41 0F 28 CF",
         "E9 49 04 00 00 90",
     };
 

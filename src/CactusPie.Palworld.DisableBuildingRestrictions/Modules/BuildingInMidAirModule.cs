@@ -6,7 +6,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public sealed class BuildingInMidAirModule : SingleAddressModuleBase
 {
-    private const string DefaultBuildingInMidAirAobs = "0F 84 8C 00 00 00 48 8D 8D";
+    private const string DefaultBuildingInMidAirAobs = "0F 84 8A 00 00 00 48 8D 8D";
 
     private const string EnabledBuildingInMidAirAobs = "90 90 90 90 90 90 48 8D 8D E0 00 00 00";
 
@@ -28,7 +28,7 @@ public sealed class BuildingInMidAirModule : SingleAddressModuleBase
         }
         else
         {
-            GameMemory.WriteBytes(Address, new byte[]{ 0x0F, 0x84, 0x8C, 0x00, 0x00, 0x00 });
+            GameMemory.WriteBytes(Address, new byte[]{ 0x0F, 0x84, 0x8A, 0x00, 0x00, 0x00 });
         }
 
         OnStateChanged();

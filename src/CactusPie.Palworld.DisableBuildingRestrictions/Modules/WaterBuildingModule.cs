@@ -6,7 +6,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public sealed class WaterBuildingModule : SingleAddressModuleBase
 {
-    private const string DefaultWaterBuildingAobs = "74 0E 0F B6 4E 30";
+    private const string DefaultWaterBuildingAobs = "75 0E 0F B6 4E 30";
 
     private const string EnabledWaterBuildingAobs = "EB 0E 0F B6 4E 30";
 
@@ -28,7 +28,7 @@ public sealed class WaterBuildingModule : SingleAddressModuleBase
         }
         else
         {
-            GameMemory.WriteBytes(Address, new byte[]{ 0x74 });
+            GameMemory.WriteBytes(Address, new byte[]{ 0x75 });
         }
 
         OnStateChanged();

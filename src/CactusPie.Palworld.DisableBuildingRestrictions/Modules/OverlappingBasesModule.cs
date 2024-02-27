@@ -6,7 +6,7 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public sealed class OverlappingBasesModule : SingleAddressModuleBase
 {
-    private const string DefaultOverlappingBasesAobs = "75 60 48 8B 9F 00 01 00 00";
+    private const string DefaultOverlappingBasesAobs = "75 53 48 8B 9F 00 01 00 00";
 
     private const string EnabledOverlappingBasesAobs = "90 90 48 8B 9F 00 01 00 00";
 
@@ -28,7 +28,7 @@ public sealed class OverlappingBasesModule : SingleAddressModuleBase
         }
         else
         {
-            GameMemory.WriteBytes(Address, new byte[]{ 0x75, 0x60 });
+            GameMemory.WriteBytes(Address, new byte[]{ 0x75, 0x53 });
         }
 
         OnStateChanged();

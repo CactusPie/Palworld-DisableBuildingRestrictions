@@ -2,6 +2,69 @@
 <CheatTable CheatEngineTableVersion="42">
   <CheatEntries>
     <CheatEntry>
+      <ID>4</ID>
+      <Description>"Disable world collision"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
+  Version: 
+  Date   : 2024-01-24
+  Author : CactusPie
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 07 B0 15 E9 2F 01 00 00) // should be unique
+
+INJECT:
+  // Patches je to jmp
+  db EB 07
+
+[DISABLE]
+
+INJECT:
+  // Reverts jmp back to je
+  db 74 07
+
+{
+// ORIGINAL CODE - INJECTION POINT: 7FF7BCC69FEF
+
+7FF7BCC69FCE: 4C 8D 7A 30              - lea r15,[rdx+30]
+7FF7BCC69FD2: 0F B6 12                 - movzx edx,byte ptr [rdx]
+7FF7BCC69FD5: 33 ED                    - xor ebp,ebp
+7FF7BCC69FD7: 4D 8B C6                 - mov r8,r14
+7FF7BCC69FDA: 49 89 6B 10              - mov [r11+10],rbp
+7FF7BCC69FDE: 4D 8B CC                 - mov r9,r12
+7FF7BCC69FE1: 4D 89 7B A8              - mov [r11-58],r15
+7FF7BCC69FE5: 48 8B CF                 - mov rcx,rdi
+7FF7BCC69FE8: E8 A3 E0 00 00           - call 7FF7BCC78090
+7FF7BCC69FED: 84 C0                    - test al,al
+// ---------- INJECTING HERE ----------
+7FF7BCC69FEF: 74 07                    - je 7FF7BCC69FF8
+// ---------- DONE INJECTING  ----------
+7FF7BCC69FF1: B0 15                    - mov al,15
+7FF7BCC69FF3: E9 2F 01 00 00           - jmp 7FF7BCC6A127
+7FF7BCC69FF8: 0F B6 0B                 - movzx ecx,byte ptr [rbx]
+7FF7BCC69FFB: 85 C9                    - test ecx,ecx
+7FF7BCC69FFD: 0F 84 22 01 00 00        - je 7FF7BCC6A125
+7FF7BCC6A003: 83 F9 01                 - cmp ecx,01
+7FF7BCC6A006: 0F 85 19 01 00 00        - jne 7FF7BCC6A125
+7FF7BCC6A00C: 48 8B CF                 - mov rcx,rdi
+7FF7BCC6A00F: E8 3C 26 11 00           - call 7FF7BCD7C650
+7FF7BCC6A014: F3 0F 10 80 C4 06 00 00  - movss xmm0,[rax+000006C4]
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>119</Key>
+          </Keys>
+          <Description>Disable collision checking</Description>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
       <ID>0</ID>
       <Description>"Allow building on water"</Description>
       <VariableType>Auto Assembler Script</VariableType>
@@ -12,41 +75,41 @@
 }
 
 [ENABLE]
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 0E 0F B6 4E 30) // should be unique
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,75 0E 0F B6 4E 30) // should be unique
 
 INJECT: // patches je to jmp
   db EB 0E
 
 [DISABLE]
 INJECT: // patches jmp to je
-  db 74 0E
+  db 75 0E
 
 {
-// ORIGINAL CODE - INJECTION POINT: 7FF69B2F4C33
+// ORIGINAL CODE - INJECTION POINT: 7FF7BCB85EFC
 
-7FF69B2F4C10: 48 89 10                 - mov [rax],rdx
-7FF69B2F4C13: 48 8D 54 24 60           - lea rdx,[rsp+60]
-7FF69B2F4C18: E8 03 8D 11 00           - call 7FF69B40D920
-7FF69B2F4C1D: 48 8B 4C 24 60           - mov rcx,[rsp+60]
-7FF69B2F4C22: 84 C0                    - test al,al
-7FF69B2F4C24: 0F 94 C3                 - sete bl
-7FF69B2F4C27: 48 85 C9                 - test rcx,rcx
-7FF69B2F4C2A: 74 05                    - je 7FF69B2F4C31
-7FF69B2F4C2C: E8 8F 2A 2A 00           - call 7FF69B5976C0
-7FF69B2F4C31: 84 DB                    - test bl,bl
+7FF7BCB85ED6: 48 8B 44 24 60           - mov rax,[rsp+60]
+7FF7BCB85EDB: 48 89 10                 - mov [rax],rdx
+7FF7BCB85EDE: 48 8D 54 24 60           - lea rdx,[rsp+60]
+7FF7BCB85EE3: E8 A8 20 12 00           - call 7FF7BCCA7F90
+7FF7BCB85EE8: 48 8B 4C 24 60           - mov rcx,[rsp+60]
+7FF7BCB85EED: 0F B6 D8                 - movzx ebx,al
+7FF7BCB85EF0: 48 85 C9                 - test rcx,rcx
+7FF7BCB85EF3: 74 05                    - je 7FF7BCB85EFA
+7FF7BCB85EF5: E8 F6 5A 2B 00           - call 7FF7BCE3B9F0
+7FF7BCB85EFA: 84 DB                    - test bl,bl
 // ---------- INJECTING HERE ----------
-7FF69B2F4C33: 74 0E                    - je 7FF69B2F4C43
+7FF7BCB85EFC: 75 0E                    - jne 7FF7BCB85F0C
 // ---------- DONE INJECTING  ----------
-7FF69B2F4C35: 0F B6 4E 30              - movzx ecx,byte ptr [rsi+30]
-7FF69B2F4C39: B2 13                    - mov dl,13
-7FF69B2F4C3B: E8 20 BD 0F 00           - call 7FF69B3F0960
-7FF69B2F4C40: 88 46 30                 - mov [rsi+30],al
-7FF69B2F4C43: 4C 8D 9C 24 60 02 00 00  - lea r11,[rsp+00000260]
-7FF69B2F4C4B: 49 8B 5B 28              - mov rbx,[r11+28]
-7FF69B2F4C4F: 49 8B 73 30              - mov rsi,[r11+30]
-7FF69B2F4C53: 41 0F 28 73 F0           - movaps xmm6,[r11-10]
-7FF69B2F4C58: 41 0F 28 7B E0           - movaps xmm7,[r11-20]
-7FF69B2F4C5D: 45 0F 28 43 D0           - movaps xmm8,[r11-30]
+7FF7BCB85EFE: 0F B6 4E 30              - movzx ecx,byte ptr [rsi+30]
+7FF7BCB85F02: B2 14                    - mov dl,14
+7FF7BCB85F04: E8 17 46 10 00           - call 7FF7BCC8A520
+7FF7BCB85F09: 88 46 30                 - mov [rsi+30],al
+7FF7BCB85F0C: 4C 8D 9C 24 60 02 00 00  - lea r11,[rsp+00000260]
+7FF7BCB85F14: 49 8B 5B 28              - mov rbx,[r11+28]
+7FF7BCB85F18: 49 8B 73 30              - mov rsi,[r11+30]
+7FF7BCB85F1C: 41 0F 28 73 F0           - movaps xmm6,[r11-10]
+7FF7BCB85F21: 41 0F 28 7B E0           - movaps xmm7,[r11-20]
+7FF7BCB85F26: 45 0F 28 43 D0           - movaps xmm8,[r11-30]
 }
 </AssemblerScript>
     </CheatEntry>
@@ -63,7 +126,7 @@ INJECT: // patches jmp to je
 }
 
 [ENABLE]
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,0F 84 8C 00 00 00 48 8D 8D) // should be unique
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,0F 84 8A 00 00 00 48 8D 8D) // should be unique
 
 INJECT: // nop the je instruction
   db 90 90 90 90 90 90
@@ -71,99 +134,177 @@ INJECT: // nop the je instruction
 [DISABLE]
 
 INJECT: // restore je instruction
-  db 0F 84 8C 00 00 00
+  db 0F 84 8A 00 00 00
 
 {
-// ORIGINAL CODE - INJECTION POINT: 7FF69B2F4BA3
+// ORIGINAL CODE - INJECTION POINT: 7FF7BCB85E6E
 
-7FF69B2F4B78: 48 8D 54 24 70        - lea rdx,[rsp+70]
-7FF69B2F4B7D: 48 8B CE              - mov rcx,rsi
-7FF69B2F4B80: C6 44 24 20 01        - mov byte ptr [rsp+20],01
-7FF69B2F4B85: 44 8B C8              - mov r9d,eax
-7FF69B2F4B88: E8 F3 A0 1F 02        - call 7FF69D4EEC80
-7FF69B2F4B8D: 48 8B 4C 24 60        - mov rcx,[rsp+60]
-7FF69B2F4B92: 48 85 C9              - test rcx,rcx
-7FF69B2F4B95: 74 05                 - je 7FF69B2F4B9C
-7FF69B2F4B97: E8 24 2B 2A 00        - call 7FF69B5976C0
-7FF69B2F4B9C: F6 85 BD 00 00 00 01  - test byte ptr [rbp+000000BD],01
+7FF7BCB85E43: 48 8B CE              - mov rcx,rsi
+7FF7BCB85E46: C6 44 24 20 01        - mov byte ptr [rsp+20],01
+7FF7BCB85E4B: 44 8B C8              - mov r9d,eax
+7FF7BCB85E4E: 48 8D 54 24 70        - lea rdx,[rsp+70]
+7FF7BCB85E53: E8 18 89 21 02        - call 7FF7BED9E770
+7FF7BCB85E58: 48 8B 4C 24 60        - mov rcx,[rsp+60]
+7FF7BCB85E5D: 48 85 C9              - test rcx,rcx
+7FF7BCB85E60: 74 05                 - je 7FF7BCB85E67
+7FF7BCB85E62: E8 89 5B 2B 00        - call 7FF7BCE3B9F0
+7FF7BCB85E67: F6 85 BD 00 00 00 01  - test byte ptr [rbp+000000BD],01
 // ---------- INJECTING HERE ----------
-7FF69B2F4BA3: 0F 84 8C 00 00 00     - je 7FF69B2F4C35
+7FF7BCB85E6E: 0F 84 8A 00 00 00     - je 7FF7BCB85EFE
 // ---------- DONE INJECTING  ----------
-7FF69B2F4BA9: 48 8D 8D E0 00 00 00  - lea rcx,[rbp+000000E0]
-7FF69B2F4BB0: E8 5B 0B 54 00        - call 7FF69B835710
-7FF69B2F4BB5: 48 85 C0              - test rax,rax
-7FF69B2F4BB8: 0F 84 85 00 00 00     - je 7FF69B2F4C43
-7FF69B2F4BBE: F7 40 08 00 00 00 60  - test [rax+08],60000000
-7FF69B2F4BC5: 75 7C                 - jne 7FF69B2F4C43
-7FF69B2F4BC7: 41 B8 01 00 00 00     - mov r8d,00000001
-7FF69B2F4BCD: 48 8D 15 64 4F 2B 04  - lea rdx,[7FF69F5A9B38]
-7FF69B2F4BD4: 48 8D 8D 80 01 00 00  - lea rcx,[rbp+00000180]
-7FF69B2F4BDB: 48 8B D8              - mov rbx,rax
+7FF7BCB85E74: 48 8D 8D E0 00 00 00  - lea rcx,[rbp+000000E0]
+7FF7BCB85E7B: E8 60 56 55 00        - call 7FF7BD0DB4E0
+7FF7BCB85E80: 48 8B D8              - mov rbx,rax
+7FF7BCB85E83: 48 85 C0              - test rax,rax
+7FF7BCB85E86: 0F 84 80 00 00 00     - je 7FF7BCB85F0C
+7FF7BCB85E8C: F7 40 08 00 00 00 60  - test [rax+08],60000000
+7FF7BCB85E93: 75 77                 - jne 7FF7BCB85F0C
+7FF7BCB85E95: 41 B8 01 00 00 00     - mov r8d,00000001
+7FF7BCB85E9B: 48 8D 15 46 B4 2D 04  - lea rdx,[7FF7C0E612E8]
+7FF7BCB85EA2: 48 8D 8D 80 01 00 00  - lea rcx,[rbp+00000180]
 }
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
-      <ID>4</ID>
-      <Description>"Disable world collision"</Description>
+      <ID>10</ID>
+      <Description>"Disable Snapping"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
   Version: 
-  Date   : 2024-01-24
+  Date   : 2024-02-05
   Author : CactusPie
 }
 
 [ENABLE]
 
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 07 B0 14 E9 3C 01 00 00) // should be unique
+aobscanmodule(CHECK1,Palworld-Win64-Shipping.exe,75 79 0F 5A D1) // should be unique
+aobscanmodule(CHECK2,Palworld-Win64-Shipping.exe,0F 87 48 04 00 00 41) // should be unique
 
-INJECT:
-  // Patches je to jmp
-  db EB 07
+CHECK1:
+  // patches jne to jmp
+  db EB
+
+CHECK2:
+  // patches ja to jmp
+  db E9 49 04 00 00 90
 
 [DISABLE]
 
-INJECT:
-  // Reverts jmp back to je
-  db 74 07
+CHECK1:
+  // restores jne
+  db 75
+
+CHECK2:
+  // restores ja
+  db 0F 87 48 04 00 00
 
 {
-// ORIGINAL CODE - INJECTION POINT: 7FF69B3D1E4F
+// ORIGINAL CODE - CHECK1 INJECTION POINT: 7FF7BCB6D548
 
-7FF69B3D1E2E: 4C 8D 7A 30              - lea r15,[rdx+30]
-7FF69B3D1E32: 0F B6 12                 - movzx edx,byte ptr [rdx]
-7FF69B3D1E35: 33 ED                    - xor ebp,ebp
-7FF69B3D1E37: 4D 8B C6                 - mov r8,r14
-7FF69B3D1E3A: 49 89 6B 10              - mov [r11+10],rbp
-7FF69B3D1E3E: 4D 8B CC                 - mov r9,r12
-7FF69B3D1E41: 4D 89 7B 98              - mov [r11-68],r15
-7FF69B3D1E45: 48 8B CF                 - mov rcx,rdi
-7FF69B3D1E48: E8 73 DD 00 00           - call 7FF69B3DFBC0
-7FF69B3D1E4D: 84 C0                    - test al,al
+7FF7BCB6D518: F2 41 0F 5C F4           - subsd xmm6,xmm12
+7FF7BCB6D51D: F2 0F 11 44 24 40        - movsd [rsp+40],xmm0
+7FF7BCB6D523: 41 0F 54 D5              - andps xmm2,xmm13
+7FF7BCB6D527: 66 0F 5A CA              - cvtpd2ps xmm1,xmm2
+7FF7BCB6D52B: F2 0F 58 F7              - addsd xmm6,xmm7
+7FF7BCB6D52F: F3 0F 10 38              - movss xmm7,[rax]
+7FF7BCB6D533: 48 8B 84 24 D0 01 00 00  - mov rax,[rsp+000001D0]
+7FF7BCB6D53B: 44 0F 28 CF              - movaps xmm9,xmm7
+7FF7BCB6D53F: F3 0F 11 4C 24 24        - movss [rsp+24],xmm1
+7FF7BCB6D545: 38 48 01                 - cmp [rax+01],cl
 // ---------- INJECTING HERE ----------
-7FF69B3D1E4F: 74 07                    - je 7FF69B3D1E58
+7FF7BCB6D548: 75 79                    - jne 7FF7BCB6D5C3
 // ---------- DONE INJECTING  ----------
-7FF69B3D1E51: B0 14                    - mov al,14
-7FF69B3D1E53: E9 3C 01 00 00           - jmp 7FF69B3D1F94
-7FF69B3D1E58: 0F B6 0B                 - movzx ecx,byte ptr [rbx]
-7FF69B3D1E5B: 85 C9                    - test ecx,ecx
-7FF69B3D1E5D: 0F 84 2F 01 00 00        - je 7FF69B3D1F92
-7FF69B3D1E63: 83 F9 01                 - cmp ecx,01
-7FF69B3D1E66: 0F 85 26 01 00 00        - jne 7FF69B3D1F92
-7FF69B3D1E6C: 48 8B CF                 - mov rcx,rdi
-7FF69B3D1E6F: E8 3C 7D 10 00           - call 7FF69B4D9BB0
-7FF69B3D1E74: F3 0F 10 80 C4 06 00 00  - movss xmm0,[rax+000006C4]
+7FF7BCB6D54A: 0F 5A D1                 - cvtps2pd xmm2,xmm1
+7FF7BCB6D54D: 41 0F 28 CF              - movaps xmm1,xmm15
+7FF7BCB6D551: 0F 28 C2                 - movaps xmm0,xmm2
+7FF7BCB6D554: 41 0F 54 CD              - andps xmm1,xmm13
+7FF7BCB6D558: F2 0F 5C C1              - subsd xmm0,xmm1
+7FF7BCB6D55C: 66 0F 5A C8              - cvtpd2ps xmm1,xmm0
+7FF7BCB6D560: 0F 2F CF                 - comiss xmm1,xmm7
+7FF7BCB6D563: 77 5E                    - ja 7FF7BCB6D5C3
+7FF7BCB6D565: 66 44 0F 2F FB           - comisd xmm15,xmm3
+7FF7BCB6D56A: B1 01                    - mov cl,01
+}
+
+{
+// ORIGINAL CODE - CHECK2 INJECTION POINT: 7FF7BCB6D5FA
+
+7FF7BCB6D5CA: F2 44 0F 10 6C 24 38  - movsd xmm13,[rsp+38]
+7FF7BCB6D5D1: F2 44 0F 10 74 24 30  - movsd xmm14,[rsp+30]
+7FF7BCB6D5D8: F3 0F 10 54 24 20     - movss xmm2,[rsp+20]
+7FF7BCB6D5DE: 41 0F 28 CB           - movaps xmm1,xmm11
+7FF7BCB6D5E2: 0F 54 0D D7 C2 4F 03  - andps xmm1,[7FF7C00698C0]
+7FF7BCB6D5E9: 0F 5A D2              - cvtps2pd xmm2,xmm2
+7FF7BCB6D5EC: 0F 28 C2              - movaps xmm0,xmm2
+7FF7BCB6D5EF: F2 0F 5C C1           - subsd xmm0,xmm1
+7FF7BCB6D5F3: 66 0F 5A C8           - cvtpd2ps xmm1,xmm0
+7FF7BCB6D5F7: 0F 2F CF              - comiss xmm1,xmm7
+// ---------- INJECTING HERE ----------
+7FF7BCB6D5FA: 0F 87 48 04 00 00     - ja 7FF7BCB6DA48
+// ---------- DONE INJECTING  ----------
+7FF7BCB6D600: 41 0F 2F C9           - comiss xmm1,xmm9
+7FF7BCB6D604: 0F 83 3E 04 00 00     - jae 7FF7BCB6DA48
+7FF7BCB6D60A: 66 44 0F 2F DB        - comisd xmm11,xmm3
+7FF7BCB6D60F: 77 0B                 - ja 7FF7BCB6D61C
+7FF7BCB6D611: 73 06                 - jae 7FF7BCB6D619
+7FF7BCB6D613: 41 0F 28 E0           - movaps xmm4,xmm8
+7FF7BCB6D617: EB 03                 - jmp 7FF7BCB6D61C
+7FF7BCB6D619: 0F 57 E4              - xorps xmm4,xmm4
+7FF7BCB6D61C: 44 0F 5A E4           - cvtps2pd xmm12,xmm4
+7FF7BCB6D620: 0F 28 EA              - movaps xmm5,xmm2
 }
 </AssemblerScript>
-      <Hotkeys>
-        <Hotkey>
-          <Action>Toggle Activation</Action>
-          <Keys>
-            <Key>119</Key>
-          </Keys>
-          <Description>Disable collision checking</Description>
-          <ID>0</ID>
-        </Hotkey>
-      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Overlapping bases"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
+  Version: 
+  Date   : 2024-02-03
+  Author : CactusPie
+}
+
+[ENABLE]
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,75 53 48 8B 9F 00 01 00 00) // should be unique
+
+INJECT:
+  // replace jne with 2x nop
+  db 90 90
+
+[DISABLE]
+INJECT:
+  // restore jne
+  db 75 53
+
+{
+// ORIGINAL CODE - INJECTION POINT: 7FF7BCC6A0D2
+
+7FF7BCC6A0AA: 48 8B CD                 - mov rcx,rbp
+7FF7BCC6A0AD: E8 BE 29 6D FE           - call 7FF7BB33CA70
+7FF7BCC6A0B2: 4C 8B C3                 - mov r8,rbx
+7FF7BCC6A0B5: 48 8B D7                 - mov rdx,rdi
+7FF7BCC6A0B8: 48 8B 08                 - mov rcx,[rax]
+7FF7BCC6A0BB: 4C 8B 89 E0 06 00 00     - mov r9,[rcx+000006E0]
+7FF7BCC6A0C2: 48 8B C8                 - mov rcx,rax
+7FF7BCC6A0C5: 41 FF D1                 - call r9
+7FF7BCC6A0C8: 48 8B B4 24 80 00 00 00  - mov rsi,[rsp+00000080]
+7FF7BCC6A0D0: 3C 28                    - cmp al,28
+// ---------- INJECTING HERE ----------
+7FF7BCC6A0D2: 75 53                    - jne 7FF7BCC6A127
+// ---------- DONE INJECTING  ----------
+7FF7BCC6A0D4: 48 8B 9F 00 01 00 00     - mov rbx,[rdi+00000100]
+7FF7BCC6A0DB: 48 63 BF 08 01 00 00     - movsxd  rdi,dword ptr [rdi+00000108]
+7FF7BCC6A0E2: 48 C1 E7 04              - shl rdi,04
+7FF7BCC6A0E6: 48 03 FB                 - add rdi,rbx
+7FF7BCC6A0E9: 48 3B DF                 - cmp rbx,rdi
+7FF7BCC6A0EC: 74 37                    - je 7FF7BCC6A125
+7FF7BCC6A0EE: 66 90                    - nop 2
+7FF7BCC6A0F0: 48 83 3B 00              - cmp qword ptr [rbx],00
+7FF7BCC6A0F4: 48 8B 4B 08              - mov rcx,[rbx+08]
+7FF7BCC6A0F8: 74 22                    - je 7FF7BCC6A11C
+}
+</AssemblerScript>
     </CheatEntry>
     <CheatEntry>
       <ID>5</ID>
@@ -216,198 +357,6 @@ INJECT:
 7FF6E4E983A8: 49 8B 73 28              - mov rsi,[r11+28]
 7FF6E4E983AC: 49 8B 7B 30              - mov rdi,[r11+30]
 7FF6E4E983B0: 49 8B E3                 - mov rsp,r11
-}
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>10</ID>
-      <Description>"Disable Snapping"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
-  Version: 
-  Date   : 2024-02-05
-  Author : CactusPie
-}
-
-[ENABLE]
-
-aobscanmodule(CHECK1,Palworld-Win64-Shipping.exe,75 79 41 0F 28 CF) // should be unique
-aobscanmodule(CHECK2,Palworld-Win64-Shipping.exe,0F 87 48 04 00 00 41) // should be unique
-
-CHECK1:
-  // patches jne to jmp
-  db EB
-
-CHECK2:
-  // patches ja to jmp
-  db E9 49 04 00 00 90
-
-[DISABLE]
-
-CHECK1:
-  // restores jne
-  db 75
-
-CHECK2:
-  // restores ja
-  db 0F 87 48 04 00 00
-
-{
-// ORIGINAL CODE - CHECK1 INJECTION POINT: 7FF69B2DC348
-
-7FF69B2DC315: F2 0F 10 0D 03 A5 96 05  - movsd xmm1,[7FF6A0C46820]
-7FF69B2DC31D: F2 0F 11 4C 24 40        - movsd [rsp+40],xmm1
-7FF69B2DC323: F2 0F 58 F7              - addsd xmm6,xmm7
-7FF69B2DC327: F3 0F 10 38              - movss xmm7,[rax]
-7FF69B2DC32B: 48 8B 84 24 D0 01 00 00  - mov rax,[rsp+000001D0]
-7FF69B2DC333: 44 0F 28 CF              - movaps xmm9,xmm7
-7FF69B2DC337: 41 0F 54 D5              - andps xmm2,xmm13
-7FF69B2DC33B: 66 0F 5A D2              - cvtpd2ps xmm2,xmm2
-7FF69B2DC33F: F3 0F 11 54 24 24        - movss [rsp+24],xmm2
-7FF69B2DC345: 38 48 01                 - cmp [rax+01],cl
-// ---------- INJECTING HERE ----------
-7FF69B2DC348: 75 79                    - jne 7FF69B2DC3C3
-// ---------- DONE INJECTING  ----------
-7FF69B2DC34A: 41 0F 28 CF              - movaps xmm1,xmm15
-7FF69B2DC34E: 41 0F 54 CD              - andps xmm1,xmm13
-7FF69B2DC352: 0F 5A D2                 - cvtps2pd xmm2,xmm2
-7FF69B2DC355: 0F 28 C2                 - movaps xmm0,xmm2
-7FF69B2DC358: F2 0F 5C C1              - subsd xmm0,xmm1
-7FF69B2DC35C: 66 0F 5A C8              - cvtpd2ps xmm1,xmm0
-7FF69B2DC360: 0F 2F CF                 - comiss xmm1,xmm7
-7FF69B2DC363: 77 5E                    - ja 7FF69B2DC3C3
-7FF69B2DC365: 66 44 0F 2F FB           - comisd xmm15,xmm3
-7FF69B2DC36A: B1 01                    - mov cl,01
-}
-
-{
-// ORIGINAL CODE - CHECK2 INJECTION POINT: 7FF69B2DC3FA
-
-7FF69B2DC3CA: F2 44 0F 10 6C 24 38  - movsd xmm13,[rsp+38]
-7FF69B2DC3D1: F2 44 0F 10 74 24 30  - movsd xmm14,[rsp+30]
-7FF69B2DC3D8: F3 0F 10 54 24 20     - movss xmm2,[rsp+20]
-7FF69B2DC3DE: 41 0F 28 CB           - movaps xmm1,xmm11
-7FF69B2DC3E2: 0F 54 0D D7 A3 4D 03  - andps xmm1,[7FF69E7B67C0]
-7FF69B2DC3E9: 0F 5A D2              - cvtps2pd xmm2,xmm2
-7FF69B2DC3EC: 0F 28 C2              - movaps xmm0,xmm2
-7FF69B2DC3EF: F2 0F 5C C1           - subsd xmm0,xmm1
-7FF69B2DC3F3: 66 0F 5A C8           - cvtpd2ps xmm1,xmm0
-7FF69B2DC3F7: 0F 2F CF              - comiss xmm1,xmm7
-// ---------- INJECTING HERE ----------
-7FF69B2DC3FA: 0F 87 48 04 00 00     - ja 7FF69B2DC848
-// ---------- DONE INJECTING  ----------
-7FF69B2DC400: 41 0F 2F C9           - comiss xmm1,xmm9
-7FF69B2DC404: 0F 83 3E 04 00 00     - jae 7FF69B2DC848
-7FF69B2DC40A: 66 44 0F 2F DB        - comisd xmm11,xmm3
-7FF69B2DC40F: 77 0B                 - ja 7FF69B2DC41C
-7FF69B2DC411: 73 06                 - jae 7FF69B2DC419
-7FF69B2DC413: 41 0F 28 E0           - movaps xmm4,xmm8
-7FF69B2DC417: EB 03                 - jmp 7FF69B2DC41C
-7FF69B2DC419: 0F 57 E4              - xorps xmm4,xmm4
-7FF69B2DC41C: 44 0F 5A E4           - cvtps2pd xmm12,xmm4
-7FF69B2DC420: 0F 28 EA              - movaps xmm5,xmm2
-}
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>6</ID>
-      <Description>"Build without support"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
-  Version: 
-  Date   : 2024-01-30
-  Author : Matt
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,7E 68 48 8B 4C 24 28) // should be unique
-
-INJECT:
-  db 90 90
-
-[DISABLE]
-INJECT:
-  db 7E 68 48 8B 4C 24 28
-
-{
-// ORIGINAL CODE - INJECTION POINT: 7FF6E4E7CC2B
-
-7FF6E4E7CBFB: E9 73 FF FF FF        - jmp 7FF6E4E7CB73
-7FF6E4E7CC00: 44 89 54 24 54        - mov [rsp+54],r10d
-7FF6E4E7CC05: E9 17 FF FF FF        - jmp 7FF6E4E7CB21
-7FF6E4E7CC0A: 4C 8D 44 24 28        - lea r8,[rsp+28]
-7FF6E4E7CC0F: 44 0F 29 4C 24 40     - movaps [rsp+40],xmm9
-7FF6E4E7CC15: 48 8D 54 24 40        - lea rdx,[rsp+40]
-7FF6E4E7CC1A: F2 44 0F 11 44 24 50  - movsd [rsp+50],xmm8
-7FF6E4E7CC21: 49 8B CF              - mov rcx,r15
-7FF6E4E7CC24: E8 B7 B4 11 00        - call 7FF6E4F980E0
-7FF6E4E7CC29: 85 C0                 - test eax,eax
-// ---------- INJECTING HERE ----------
-7FF6E4E7CC2B: 7E 68                 - jle 7FF6E4E7CC95
-// ---------- DONE INJECTING  ----------
-7FF6E4E7CC2D: 48 8B 4C 24 28        - mov rcx,[rsp+28]
-7FF6E4E7CC32: 48 85 C9              - test rcx,rcx
-7FF6E4E7CC35: 74 05                 - je 7FF6E4E7CC3C
-7FF6E4E7CC37: E8 E4 02 2B 00        - call 7FF6E512CF20
-7FF6E4E7CC3C: 48 8B 4D 40           - mov rcx,[rbp+40]
-7FF6E4E7CC40: 33 DB                 - xor ebx,ebx
-7FF6E4E7CC42: 89 5D 48              - mov [rbp+48],ebx
-7FF6E4E7CC45: 48 85 C9              - test rcx,rcx
-7FF6E4E7CC48: 74 05                 - je 7FF6E4E7CC4F
-7FF6E4E7CC4A: E8 D1 02 2B 00        - call 7FF6E512CF20
-}
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>7</ID>
-      <Description>"Overlapping bases"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : Palworld-Win64-Shipping.exe
-  Version: 
-  Date   : 2024-02-03
-  Author : CactusPie
-}
-
-[ENABLE]
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,75 60 48 8B 9F 00 01 00 00) // should be unique
-
-INJECT:
-  // replace jne with 2x nop
-  db 90 90
-
-[DISABLE]
-INJECT:
-  // restore jne
-  db 75 60
-
-{
-// ORIGINAL CODE - INJECTION POINT: 7FF69B3D1F32
-
-7FF69B3D1F0A: 48 8B CD                 - mov rcx,rbp
-7FF69B3D1F0D: E8 DE A5 70 FE           - call 7FF699ADC4F0
-7FF69B3D1F12: 4C 8B C3                 - mov r8,rbx
-7FF69B3D1F15: 48 8B D7                 - mov rdx,rdi
-7FF69B3D1F18: 48 8B 08                 - mov rcx,[rax]
-7FF69B3D1F1B: 4C 8B 89 E0 06 00 00     - mov r9,[rcx+000006E0]
-7FF69B3D1F22: 48 8B C8                 - mov rcx,rax
-7FF69B3D1F25: 41 FF D1                 - call r9
-7FF69B3D1F28: 48 8B B4 24 90 00 00 00  - mov rsi,[rsp+00000090]
-7FF69B3D1F30: 3C 27                    - cmp al,27
-// ---------- INJECTING HERE ----------
-7FF69B3D1F32: 75 60                    - jne 7FF69B3D1F94
-// ---------- DONE INJECTING  ----------
-7FF69B3D1F34: 48 8B 9F 00 01 00 00     - mov rbx,[rdi+00000100]
-7FF69B3D1F3B: 48 63 BF 08 01 00 00     - movsxd  rdi,dword ptr [rdi+00000108]
-7FF69B3D1F42: 48 C1 E7 04              - shl rdi,04
-7FF69B3D1F46: 48 03 FB                 - add rdi,rbx
-7FF69B3D1F49: 48 3B DF                 - cmp rbx,rdi
-7FF69B3D1F4C: 74 44                    - je 7FF69B3D1F92
-7FF69B3D1F4E: 66 90                    - nop 2
-7FF69B3D1F50: 0F 10 03                 - movups xmm0,[rbx]
-7FF69B3D1F53: 66 48 0F 7E C0           - movq rax,xmm0
-7FF69B3D1F58: 0F 11 44 24 50           - movups [rsp+50],xmm0
 }
 </AssemblerScript>
     </CheatEntry>

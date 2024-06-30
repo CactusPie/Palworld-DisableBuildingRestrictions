@@ -268,43 +268,45 @@ CHECK2:
 }
 
 [ENABLE]
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,75 53 48 8B 9F 00 01 00 00) // should be unique
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 0A E9 F7 00 00 00) // should be unique
 
 INJECT:
-  // replace jne with 2x nop
+  // replace je with 2x nop
   db 90 90
 
 [DISABLE]
 INJECT:
   // restore jne
-  db 75 53
+  db 74 0A
+
+unregistersymbol(INJECT)
 
 {
-// ORIGINAL CODE - INJECTION POINT: 7FF7BCC6A0D2
+// ORIGINAL CODE - INJECTION POINT: 7FF7827E331B
 
-7FF7BCC6A0AA: 48 8B CD                 - mov rcx,rbp
-7FF7BCC6A0AD: E8 BE 29 6D FE           - call 7FF7BB33CA70
-7FF7BCC6A0B2: 4C 8B C3                 - mov r8,rbx
-7FF7BCC6A0B5: 48 8B D7                 - mov rdx,rdi
-7FF7BCC6A0B8: 48 8B 08                 - mov rcx,[rax]
-7FF7BCC6A0BB: 4C 8B 89 E0 06 00 00     - mov r9,[rcx+000006E0]
-7FF7BCC6A0C2: 48 8B C8                 - mov rcx,rax
-7FF7BCC6A0C5: 41 FF D1                 - call r9
-7FF7BCC6A0C8: 48 8B B4 24 80 00 00 00  - mov rsi,[rsp+00000080]
-7FF7BCC6A0D0: 3C 28                    - cmp al,28
+7FF7827E32F8: 74 28                    - je 7FF7827E3322
+7FF7827E32FA: F7 40 08 00 00 00 60     - test [rax+08],60000000
+7FF7827E3301: 75 1F                    - jne 7FF7827E3322
+7FF7827E3303: 48 8B 08                 - mov rcx,[rax]
+7FF7827E3306: 4D 8B C7                 - mov r8,r15
+7FF7827E3309: 48 8B D7                 - mov rdx,rdi
+7FF7827E330C: 4C 8B 89 38 03 00 00     - mov r9,[rcx+00000338]
+7FF7827E3313: 48 8B C8                 - mov rcx,rax
+7FF7827E3316: 41 FF D1                 - call r9
+7FF7827E3319: 3C 2D                    - cmp al,2D
 // ---------- INJECTING HERE ----------
-7FF7BCC6A0D2: 75 53                    - jne 7FF7BCC6A127
+7FF7827E331B: 74 0A                    - je 7FF7827E3327
 // ---------- DONE INJECTING  ----------
-7FF7BCC6A0D4: 48 8B 9F 00 01 00 00     - mov rbx,[rdi+00000100]
-7FF7BCC6A0DB: 48 63 BF 08 01 00 00     - movsxd  rdi,dword ptr [rdi+00000108]
-7FF7BCC6A0E2: 48 C1 E7 04              - shl rdi,04
-7FF7BCC6A0E6: 48 03 FB                 - add rdi,rbx
-7FF7BCC6A0E9: 48 3B DF                 - cmp rbx,rdi
-7FF7BCC6A0EC: 74 37                    - je 7FF7BCC6A125
-7FF7BCC6A0EE: 66 90                    - nop 2
-7FF7BCC6A0F0: 48 83 3B 00              - cmp qword ptr [rbx],00
-7FF7BCC6A0F4: 48 8B 4B 08              - mov rcx,[rbx+08]
-7FF7BCC6A0F8: 74 22                    - je 7FF7BCC6A11C
+7FF7827E331D: E9 F7 00 00 00           - jmp 7FF7827E3419
+7FF7827E3322: 4D 85 F6                 - test r14,r14
+7FF7827E3325: 74 53                    - je 7FF7827E337A
+7FF7827E3327: 41 F7 46 08 00 00 00 60  - test [r14+08],60000000
+7FF7827E332F: 75 49                    - jne 7FF7827E337A
+7FF7827E3331: 49 8B 06                 - mov rax,[r14]
+7FF7827E3334: 4D 8D 47 18              - lea r8,[r15+18]
+7FF7827E3338: 48 8B D7                 - mov rdx,rdi
+7FF7827E333B: 49 8B CE                 - mov rcx,r14
+7FF7827E333E: FF 90 40 03 00 00        - call qword ptr [rax+00000340]
 }
 </AssemblerScript>
     </CheatEntry>

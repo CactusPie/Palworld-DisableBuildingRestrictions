@@ -13,7 +13,7 @@
 
 [ENABLE]
 
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,0F 84 40 01 00 00 48 8B CF E8 75) // should be unique
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe, 0F 84 40 01 00 00 48 8B CF E8 45) // should be unique
 
 INJECT:
   // Patches je to jmp
@@ -28,31 +28,31 @@ INJECT:
 unregistersymbol(INJECT)
 
 {
-// ORIGINAL CODE - INJECTION POINT: 7FF7827F09DD
+// ORIGINAL CODE - INJECTION POINT: Palworld-Win64-Shipping.exe+2B4367D
 
-7FF7827F0995: 44 0F 28 A4 24 D0 01 00 00  - movaps xmm12,[rsp+000001D0]
-7FF7827F099E: 44 0F 28 9C 24 E0 01 00 00  - movaps xmm11,[rsp+000001E0]
-7FF7827F09A7: 44 0F 28 94 24 F0 01 00 00  - movaps xmm10,[rsp+000001F0]
-7FF7827F09B0: 48 8D 0C 80                 - lea rcx,[rax+rax*4]
-7FF7827F09B4: 44 0F 28 8C 24 00 02 00 00  - movaps xmm9,[rsp+00000200]
-7FF7827F09BD: 4C 8D 24 CF                 - lea r12,[rdi+rcx*8]
-7FF7827F09C1: 44 0F 28 84 24 10 02 00 00  - movaps xmm8,[rsp+00000210]
-7FF7827F09CA: 0F 28 BC 24 20 02 00 00     - movaps xmm7,[rsp+00000220]
-7FF7827F09D2: 0F 28 B4 24 30 02 00 00     - movaps xmm6,[rsp+00000230]
-7FF7827F09DA: 49 3B FC                    - cmp rdi,r12
+Palworld-Win64-Shipping.exe+2B43635: 44 0F 28 A4 24 D0 01 00 00  - movaps xmm12,[rsp+000001D0]
+Palworld-Win64-Shipping.exe+2B4363E: 44 0F 28 9C 24 E0 01 00 00  - movaps xmm11,[rsp+000001E0]
+Palworld-Win64-Shipping.exe+2B43647: 44 0F 28 94 24 F0 01 00 00  - movaps xmm10,[rsp+000001F0]
+Palworld-Win64-Shipping.exe+2B43650: 48 8D 0C 80                 - lea rcx,[rax+rax*4]
+Palworld-Win64-Shipping.exe+2B43654: 44 0F 28 8C 24 00 02 00 00  - movaps xmm9,[rsp+00000200]
+Palworld-Win64-Shipping.exe+2B4365D: 4C 8D 24 CF                 - lea r12,[rdi+rcx*8]
+Palworld-Win64-Shipping.exe+2B43661: 44 0F 28 84 24 10 02 00 00  - movaps xmm8,[rsp+00000210]
+Palworld-Win64-Shipping.exe+2B4366A: 0F 28 BC 24 20 02 00 00     - movaps xmm7,[rsp+00000220]
+Palworld-Win64-Shipping.exe+2B43672: 0F 28 B4 24 30 02 00 00     - movaps xmm6,[rsp+00000230]
+Palworld-Win64-Shipping.exe+2B4367A: 49 3B FC                    - cmp rdi,r12
 // ---------- INJECTING HERE ----------
-7FF7827F09DD: 0F 84 40 01 00 00           - je 7FF7827F0B23
+Palworld-Win64-Shipping.exe+2B4367D: 0F 84 40 01 00 00           - je Palworld-Win64-Shipping.exe+2B437C3
 // ---------- DONE INJECTING  ----------
-7FF7827F09E3: 48 8B CF                    - mov rcx,rdi
-7FF7827F09E6: E8 75 32 07 02              - call 7FF784863C60
-7FF7827F09EB: 84 C0                       - test al,al
-7FF7827F09ED: 0F 84 23 01 00 00           - je 7FF7827F0B16
-7FF7827F09F3: 48 8B CF                    - mov rcx,rdi
-7FF7827F09F6: E8 85 94 06 02              - call 7FF784859E80
-7FF7827F09FB: 48 8B D8                    - mov rbx,rax
-7FF7827F09FE: 48 85 C0                    - test rax,rax
-7FF7827F0A01: 74 79                       - je 7FF7827F0A7C
-7FF7827F0A03: 48 8D 96 38 03 00 00        - lea rdx,[rsi+00000338]
+Palworld-Win64-Shipping.exe+2B43683: 48 8B CF                    - mov rcx,rdi
+Palworld-Win64-Shipping.exe+2B43686: E8 45 68 07 02              - call Palworld-Win64-Shipping.exe+4BB9ED0
+Palworld-Win64-Shipping.exe+2B4368B: 84 C0                       - test al,al
+Palworld-Win64-Shipping.exe+2B4368D: 0F 84 23 01 00 00           - je Palworld-Win64-Shipping.exe+2B437B6
+Palworld-Win64-Shipping.exe+2B43693: 48 8B CF                    - mov rcx,rdi
+Palworld-Win64-Shipping.exe+2B43696: E8 55 CA 06 02              - call Palworld-Win64-Shipping.exe+4BB00F0
+Palworld-Win64-Shipping.exe+2B4369B: 48 8B D8                    - mov rbx,rax
+Palworld-Win64-Shipping.exe+2B4369E: 48 85 C0                    - test rax,rax
+Palworld-Win64-Shipping.exe+2B436A1: 74 79                       - je Palworld-Win64-Shipping.exe+2B4371C
+Palworld-Win64-Shipping.exe+2B436A3: 48 8D 96 38 03 00 00        - lea rdx,[rsi+00000338]
 }
 </AssemblerScript>
       <Hotkeys>
@@ -268,7 +268,7 @@ CHECK2:
 }
 
 [ENABLE]
-aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 0A E9 F7 00 00 00) // should be unique
+aobscanmodule(INJECT,Palworld-Win64-Shipping.exe,74 0A E9 ?? ?? ?? ?? 4D 85) // should be unique
 
 INJECT:
   // replace je with 2x nop
@@ -282,31 +282,31 @@ INJECT:
 unregistersymbol(INJECT)
 
 {
-// ORIGINAL CODE - INJECTION POINT: 7FF7827E331B
+// ORIGINAL CODE - INJECTION POINT: 7FF631D45FF1
 
-7FF7827E32F8: 74 28                    - je 7FF7827E3322
-7FF7827E32FA: F7 40 08 00 00 00 60     - test [rax+08],60000000
-7FF7827E3301: 75 1F                    - jne 7FF7827E3322
-7FF7827E3303: 48 8B 08                 - mov rcx,[rax]
-7FF7827E3306: 4D 8B C7                 - mov r8,r15
-7FF7827E3309: 48 8B D7                 - mov rdx,rdi
-7FF7827E330C: 4C 8B 89 38 03 00 00     - mov r9,[rcx+00000338]
-7FF7827E3313: 48 8B C8                 - mov rcx,rax
-7FF7827E3316: 41 FF D1                 - call r9
-7FF7827E3319: 3C 2D                    - cmp al,2D
+7FF631D45FCE: 74 28                    - je 7FF631D45FF8
+7FF631D45FD0: F7 40 08 00 00 00 60     - test [rax+08],60000000
+7FF631D45FD7: 75 1F                    - jne 7FF631D45FF8
+7FF631D45FD9: 48 8B 08                 - mov rcx,[rax]
+7FF631D45FDC: 4C 8B C7                 - mov r8,rdi
+7FF631D45FDF: 48 8B D6                 - mov rdx,rsi
+7FF631D45FE2: 4C 8B 89 38 03 00 00     - mov r9,[rcx+00000338]
+7FF631D45FE9: 48 8B C8                 - mov rcx,rax
+7FF631D45FEC: 41 FF D1                 - call r9
+7FF631D45FEF: 3C 2D                    - cmp al,2D
 // ---------- INJECTING HERE ----------
-7FF7827E331B: 74 0A                    - je 7FF7827E3327
+7FF631D45FF1: 74 0A                    - je 7FF631D45FFD
 // ---------- DONE INJECTING  ----------
-7FF7827E331D: E9 F7 00 00 00           - jmp 7FF7827E3419
-7FF7827E3322: 4D 85 F6                 - test r14,r14
-7FF7827E3325: 74 53                    - je 7FF7827E337A
-7FF7827E3327: 41 F7 46 08 00 00 00 60  - test [r14+08],60000000
-7FF7827E332F: 75 49                    - jne 7FF7827E337A
-7FF7827E3331: 49 8B 06                 - mov rax,[r14]
-7FF7827E3334: 4D 8D 47 18              - lea r8,[r15+18]
-7FF7827E3338: 48 8B D7                 - mov rdx,rdi
-7FF7827E333B: 49 8B CE                 - mov rcx,r14
-7FF7827E333E: FF 90 40 03 00 00        - call qword ptr [rax+00000340]
+7FF631D45FF3: E9 EE 00 00 00           - jmp 7FF631D460E6
+7FF631D45FF8: 4D 85 FF                 - test r15,r15
+7FF631D45FFB: 74 4B                    - je 7FF631D46048
+7FF631D45FFD: 41 F7 47 08 00 00 00 60  - test [r15+08],60000000
+7FF631D46005: 75 41                    - jne 7FF631D46048
+7FF631D46007: 49 8B 07                 - mov rax,[r15]
+7FF631D4600A: 4C 8D 47 18              - lea r8,[rdi+18]
+7FF631D4600E: 48 8B D6                 - mov rdx,rsi
+7FF631D46011: 49 8B CF                 - mov rcx,r15
+7FF631D46014: FF 90 40 03 00 00        - call qword ptr [rax+00000340]
 }
 </AssemblerScript>
     </CheatEntry>

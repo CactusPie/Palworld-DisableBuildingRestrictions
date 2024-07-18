@@ -6,9 +6,9 @@ namespace CactusPie.Palworld.DisableBuildingRestrictions.Modules;
 
 public sealed class OverlappingBuildingsModule : SingleAddressModuleBase
 {
-    private const string DefaultOverlappingBuildingsAobs = "0F 84 40 01 00 00 48 8B CF E8 75";
+    private const string DefaultOverlappingBuildingsAobs = "0F 84 40 01 00 00 48 8B CF E8 45";
 
-    private const string EnabledOverlappingBuildingsAobs = "E9 41 01 00 00 90 48 8B CF E8 75";
+    private const string EnabledOverlappingBuildingsAobs = "E9 41 01 00 00 90 48 8B CF E8 48";
 
     public override Key Hotkey => Key.F8;
 
